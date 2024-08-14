@@ -1,0 +1,10 @@
+'Source: https://www.linkedin.com/pulse/excel-named-ranges-incl-hidden-names-herve-hanuise/'
+'VBA Macro that works 99% of the time after using ALT I F F F shortkey to Inspector function'
+'Will not work with 1004 error'
+Sub RemoveAllHiddenNames()
+ For Each tempName In ActiveWorkbook.Names
+ If tempName.Visible = False Then
+ tempName.Delete
+ End If
+ Next
+End Sub
