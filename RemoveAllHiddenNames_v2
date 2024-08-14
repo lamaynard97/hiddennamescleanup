@@ -1,0 +1,33 @@
+'Source: https://gist.github.com/airstrike/a8019e7d9f99cebc944824ffdf100675
+'Works for 1004 error
+
+Sub RemoveHiddenNames()
+    Dim tempname As Name
+    Application.ScreenUpdating = False
+    Dim Calc As Long
+    Calc = xlCalculationManual
+    If Application.Calculation <> xlCalculationManual Then Calc = xlCalculationSemiautomatic
+    Application.Calculation = xlCalculationManual
+    Dim statuspre As String
+    statuspre = "Deleting hidden names: ["
+    Dim namecount As Long, deleted As Long
+    namecount = ActiveWorkbook.Names.Count
+    
+    On Error Resume Next
+    For Each tempname In ActiveWorkbook.Names
+        If tempname.Visible = False Then
+            tempname.Visible = True 'To help delete manually if the below fails
+            tempname.delete
+            deleted = deleted + 1
+            If deleted Mod 100 = 0 Then Application.StatusBar = statuspre & deleted & "/" & namecount & "]"
+        End If
+    Next
+    Application.StatusBar = statuspre & deleted & "/" & namecount & "]"
+    On Error GoTo 0
+    
+    Application.ScreenUpdating = True
+    Application.Calculation = Calc
+    
+    Exit Sub
+    
+End Sub
