@@ -1,4 +1,5 @@
 'Source: https://gist.github.com/airstrike/a8019e7d9f99cebc944824ffdf100675
+'VBA Macro that works after using ALT I F F F shortkey to Inspector function
 'Works for 1004 error
 
 Sub RemoveHiddenNames()
